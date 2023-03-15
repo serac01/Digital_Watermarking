@@ -1,1 +1,1 @@
-# Digital_Watermarking
+# Digital Watermarking
