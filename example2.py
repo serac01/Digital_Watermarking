@@ -83,10 +83,16 @@ def watermark(picture):
             index += 1
 
             if a[1] % 2 == 0 and digit == 1: #Check if the LSB in of the green color chanel in a is even and if the actual bit in the watermark is '1'
-                a[1] = a[1] + 1
+                #a[1] = a[1] + 1
+                a[0] = 255
+                a[1] = 0
+                a[2] = 0
 
             elif a[1] % 2 == 1 and digit == 0: #Check if the LSB in of the green color chanel in a is odd and if the actual bit in the watermark is '0'
-                a[1] = a[1] - 1
+                #a[1] = a[1] - 1
+                a[0] = 0
+                a[1] = 0
+                a[2] = 255
             picture[i, j] = a
 
 def sha_extract(picture):
@@ -120,7 +126,7 @@ while option != 0:
         imagePath = "Original Images\\dog.png"
         id = input("ID: ")
         #DEBUG
-        id="Some I Want"
+        id="What I Want"
 
         sha, info = hash(id)
         img = cv.imread(imagePath)
@@ -128,15 +134,15 @@ while option != 0:
         width = img.shape[1]
 
         p1 = arnold(img)
-        cv.imwrite("Watermarked Images\\dog_wt2-1.png", p1)
+        cv.imwrite("Watermarked Images\\dog_arnold.png", p1)
         watermark(p1)
-        cv.imwrite("Watermarked Images\\dog_wt2-2.png", p1)
+        cv.imwrite("Watermarked Images\\dog_wtarnold.png", p1)
         p2 = recover(p1)
-        cv.imwrite("Watermarked Images\\dog_wt2.png", p2)
+        cv.imwrite("Watermarked Images\\dog_recover.png", p2)
     elif option == '2':
         imagePathD = input("Path of the image to extract: ")
         #DEBUG1
-        imagePathD = "Watermarked Images\\dog_wt2.png"
+        imagePathD = "Watermarked Images\\dog_recover.png"
         idD = input("ID: ")
         #DEBUG
         idD="What I Want"
