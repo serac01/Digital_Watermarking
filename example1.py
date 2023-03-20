@@ -29,7 +29,9 @@ def embedding_info(picname, savename, text):
         for col in range(columns):
             for color in range(colors):
                 if count < len(embed):
-                    im[row][col][color] = im[row][col][color] // 2 * 2 + embed[count] #It divides it by 2 and rounds down to the nearest even number using the floor division operator "// 2 * 2". This is done to clear the LSB of the color component so that it can be replaced with the next bit of the message.
+                    #It divides it by 2 and rounds down to the nearest even number using the floor division operator "// 2 * 2". 
+                    #This is done to clear the LSB of the color component so that it can be replaced with the next bit of the message.
+                    im[row][col][color] = im[row][col][color] // 2 * 2 + embed[count] 
                     count += 1
 
     cv2.imwrite(savename, im)
@@ -59,30 +61,25 @@ def extract_info(picname):
                         return text[:-3]
                     extract = np.array([], dtype=int)
 
-def main():
-    print("Digital Watermarking - Example 1")
-    option=1
-    while option != 0:
-        option = input("\t1 - Watermark Embedding\n\t2 - Watermark Extracting\n\t0 - exit\n\t>> ")
-        if option == '1':
-            imagePath = input("Path of the image to be embeded: ")
-            #DEBUG1
-            
-            imagePath = "Original Images\\dog.png"
-            checkImageFormat(imagePath)
-            watermark = input("Text for watermark: ")
-            #DEBUG
-            watermark="Some text"
-            embedding_info(imagePath, 'Watermarked Images\\dog_wt.png', watermark)
-        elif option == '2':
-            imagePath = input("Path for the image to extract: ")
-            #DEBUG
-            imagePath = "Watermarked Images\\dog_wt.png"
-            checkImageFormat(imagePath)
-            text = extract_info(imagePath)
-            print("Extracted Information:", text)
-        elif option == '0':
-            sys.exit()
-    
-if __name__ == '__main__':
-    main()
+print("Digital Watermarking - Example 1")
+option=1
+while option != 0:
+    option = input("\t1 - Watermark Embedding\n\t2 - Watermark Extracting\n\t0 - exit\n\t>> ")
+    if option == '1':
+        imagePath = input("Path of the image to be embeded: ")
+        #DEBUG
+        imagePath = "Original Images\\dog.png"
+        checkImageFormat(imagePath)
+        watermark = input("Text for watermark: ")
+        #DEBUG
+        watermark="Here goes the watermark"
+        embedding_info(imagePath, 'Watermarked Images\\dog_ex1.png', watermark)
+    elif option == '2':
+        imagePath = input("Path for the image to extract: ")
+        #DEBUG
+        imagePath = "Watermarked Images\\dog_ex1.png"
+        checkImageFormat(imagePath)
+        text = extract_info(imagePath)
+        print("Extracted Information:", text)
+    elif option == '0':
+        sys.exit()

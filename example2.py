@@ -83,16 +83,10 @@ def watermark(picture):
             index += 1
 
             if a[1] % 2 == 0 and digit == 1: #Check if the LSB in of the green color chanel in a is even and if the actual bit in the watermark is '1'
-                #a[1] = a[1] + 1
-                a[0] = 255
-                a[1] = 0
-                a[2] = 0
+                a[1] = a[1] + 1
 
             elif a[1] % 2 == 1 and digit == 0: #Check if the LSB in of the green color chanel in a is odd and if the actual bit in the watermark is '0'
-                #a[1] = a[1] - 1
-                a[0] = 0
-                a[1] = 0
-                a[2] = 255
+                a[1] = a[1] - 1
             picture[i, j] = a
 
 def sha_extract(picture):
@@ -107,7 +101,6 @@ def sha_extract(picture):
                 if num <= 9:
                     s = s + chr(int(num + 48))
                 else:
-
                     s = s + chr(int(num + 87))
                 num = 0
             else:
@@ -115,37 +108,33 @@ def sha_extract(picture):
                 count += 1
     return s
 
-## MAIN ##
-print("Digital Watermarking - Example 1")
+print("Digital Watermarking - Example 2")
 option=1
 while option != 0:
     option = input("\t1 - Watermark Embedding\n\t2 - Watermark Extracting\n\t0 - exit\n\t>> ")
     if option == '1':
         imagePath = input("Path of the image to be embeded: ")
-        #DEBUG1
+        #DEBUG
         imagePath = "Original Images\\dog.png"
         id = input("ID: ")
         #DEBUG
-        id="What I Want"
-
+        id="Original Watermark"
         sha, info = hash(id)
         img = cv.imread(imagePath)
         height = img.shape[0]
         width = img.shape[1]
 
         p1 = arnold(img)
-        cv.imwrite("Watermarked Images\\dog_arnold.png", p1)
         watermark(p1)
-        cv.imwrite("Watermarked Images\\dog_wtarnold.png", p1)
         p2 = recover(p1)
-        cv.imwrite("Watermarked Images\\dog_recover.png", p2)
+        cv.imwrite("Watermarked Images\\dog_ex2.png", p2)
     elif option == '2':
         imagePathD = input("Path of the image to extract: ")
-        #DEBUG1
-        imagePathD = "Watermarked Images\\dog_recover.png"
+        #DEBUG
+        imagePathD = "Watermarked Images\\dog_ex2.png"
         idD = input("ID: ")
         #DEBUG
-        idD="What I Want"
+        idD="Wrong Watermark"
 
         sha, info = hash(idD)
         img = cv.imread(imagePathD)
