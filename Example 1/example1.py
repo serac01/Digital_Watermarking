@@ -25,14 +25,13 @@ def embedding_info(picname, savename, text):
         for i in range(16):
             embed.append(int(bin_sign[i]))
 
-    print(embed)
     for row in range(rows):
         for col in range(columns):
             for color in range(colors):
                 if count < len(embed):
                     #It divides it by 2 and rounds down to the nearest even number using the floor division operator "// 2 * 2". 
                     #This is done to clear the LSB of the color component so that it can be replaced with the next bit of the message.
-                    im[row][col][color] = im[row][col][color] // 2 * 2 + embed[count] 
+                    im[row][col][color] = im[row][col][color] // 2 * 2 + embed[count]
                     count += 1
 
     cv2.imwrite(savename, im)

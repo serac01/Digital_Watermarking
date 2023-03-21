@@ -9,11 +9,12 @@ RowRange = 16
 def hash(ID):
     hash_method = hashlib.sha256()
     hash_method.update(ID.encode('utf-8'))
+    
     binary = []
     temp = []
     result = []
     str = hash_method.hexdigest()
-
+    
     for i in str:
         if i >= '0' and i <= '9':
             b = ord(i) - 48
@@ -134,7 +135,7 @@ while option != 0:
         imagePathD = "Watermarked Images\\dog_ex2.png"
         idD = input("ID: ")
         #DEBUG
-        idD="Wrong Watermark"
+        idD="Original Watermark"
 
         sha, info = hash(idD)
         img = cv.imread(imagePathD)
@@ -149,5 +150,5 @@ while option != 0:
             print(sha)
             print(sha_extract(arnold(img)))
             print("Copyright verified unsuccessfully")
-    elif option == '0':
+    else:
         sys.exit()
