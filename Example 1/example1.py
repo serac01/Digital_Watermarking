@@ -25,6 +25,7 @@ def embedding_info(picname, savename, text):
         for i in range(16):
             embed.append(int(bin_sign[i]))
 
+    print(embed)
     for row in range(rows):
         for col in range(columns):
             for color in range(colors):
@@ -64,7 +65,7 @@ def extract_info(picname):
 print("Digital Watermarking - Example 1")
 option=1
 while option != 0:
-    option = input("\t1 - Watermark Embedding\n\t2 - Watermark Extracting\n\t0 - exit\n\t>> ")
+    option = input("\t1 - Watermark Embedding\n\t2 - Watermark Extracting\n\tOther - exit\n\t>> ")
     if option == '1':
         imagePath = input("Path of the image to be embeded: ")
         #DEBUG
@@ -81,5 +82,5 @@ while option != 0:
         checkImageFormat(imagePath)
         text = extract_info(imagePath)
         print("Extracted Information:", text)
-    elif option == '0':
+    else:
         sys.exit()
