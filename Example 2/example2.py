@@ -115,11 +115,7 @@ while option != 0:
     option = input("\t1 - Watermark Embedding\n\t2 - Watermark Extracting\n\t0 - exit\n\t>> ")
     if option == '1':
         imagePath = input("Path of the image to be embeded: ")
-        #DEBUG
-        imagePath = "Original Images\\dog.png"
         id = input("ID: ")
-        #DEBUG
-        id="Original Watermark"
         sha, info = hash(id)
         img = cv.imread(imagePath)
         height = img.shape[0]
@@ -131,11 +127,7 @@ while option != 0:
         cv.imwrite("Watermarked Images\\dog_ex2.png", p2)
     elif option == '2':
         imagePathD = input("Path of the image to extract: ")
-        #DEBUG
-        imagePathD = "Watermarked Images\\dog_ex2.png"
         idD = input("ID: ")
-        #DEBUG
-        idD="Original Watermark"
 
         sha, info = hash(idD)
         img = cv.imread(imagePathD)

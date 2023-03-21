@@ -67,17 +67,11 @@ while option != 0:
     option = input("\t1 - Watermark Embedding\n\t2 - Watermark Extracting\n\tOther - exit\n\t>> ")
     if option == '1':
         imagePath = input("Path of the image to be embeded: ")
-        #DEBUG
-        imagePath = "Original Images\\dog.png"
         checkImageFormat(imagePath)
         watermark = input("Text for watermark: ")
-        #DEBUG
-        watermark="Here goes the watermark"
         embedding_info(imagePath, 'Watermarked Images\\dog_ex1.png', watermark)
     elif option == '2':
         imagePath = input("Path for the image to extract: ")
-        #DEBUG
-        imagePath = "Watermarked Images\\dog_ex1.png"
         checkImageFormat(imagePath)
         text = extract_info(imagePath)
         print("Extracted Information:", text)
